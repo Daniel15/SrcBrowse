@@ -1,0 +1,7 @@
+:global .wrapper {
+  padding: 1em;
+}
+
+:global .wrapper > h1 {
+  margin-top: 0;
+}

@@ -1,0 +1,17 @@
+.filesContainer h2 {
+  margin: 0.4em 0;
+}
+
+.files {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tree {
+  margin: 0 1em 0 0;
+  min-width: 300px;
+}
+
+.code {
+  flex-grow: 1;
+}

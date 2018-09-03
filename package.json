@@ -1,0 +1,17 @@
+{
+  "name": "srcbrowse",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build ./index.html",
+    "watch": "parcel ./index.html"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.1.3",
+    "babel-preset-react-app": "^3.1.2",
+    "parcel-bundler": "^1.9.7",
+    "postcss-modules": "^1.3.2",
+    "sanitize.css": "^7.0.1",
+    "source-map": "^0.7.3"
+  }
+}
