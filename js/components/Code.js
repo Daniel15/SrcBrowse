@@ -6,10 +6,13 @@ function runPrism(code) {
 
 export default class Code extends React.PureComponent {
   render() {
-    const code = runPrism(this.props.code);
+    const code = this.props.code || '// File is empty';
     return (
       <pre className={classNames.code + ' language-javascript'}>
-        <code className="language-javascript" dangerouslySetInnerHTML={code} />
+        <code
+          className="language-javascript"
+          dangerouslySetInnerHTML={runPrism(code)}
+        />
       </pre>
     );
   }
