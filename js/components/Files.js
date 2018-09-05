@@ -1,10 +1,23 @@
+// @flow
+
+import React from 'react';
+
 import classNames from './Files.css';
 import Code from './Code';
 import FileTree from './FileTree';
 
 import buildTree from '../buildTree';
 
-export default class Files extends React.Component {
+type Props = {|
+  files: Map<string, ?string>,
+|};
+
+type State = {|
+  selectedFile: ?string,
+  selectedDir: $ReadOnlyArray<string>,
+|};
+
+export default class Files extends React.Component<Props, State> {
   state = {
     selectedDir: [],
     selectedFile: null,
@@ -38,11 +51,11 @@ export default class Files extends React.Component {
       : '/' + this.state.selectedDir.join('/') + '/';
   }
 
-  _onSelectDir = (path) => {
+  _onSelectDir = (path: $ReadOnlyArray<string>) => {
     this.setState({selectedDir: path});
   }
 
-  _onSelectFile = (path) => {
+  _onSelectFile = (path: string) => {
     this.setState({selectedFile: path});
   }
 }

@@ -1,5 +1,14 @@
-export default function buildTree(files) {
-  const tree = {
+// @flow
+
+export type TreeNode = $ReadOnly<{|
+  name: string,
+  path: string,
+  type: 'dir' | 'file',
+  children: Map<string, TreeNode>,
+|}>;
+
+export default function buildTree(files: Array<string>): TreeNode {
+  const tree: TreeNode = {
     name: '/',
     path: '',
     type: 'dir',
@@ -16,6 +25,7 @@ export default function buildTree(files) {
         if (!next) {
           next = {
             name: piece,
+            path: `${curr.path}/${piece}`,
             type: 'dir',
             children: new Map(),
           };
@@ -35,7 +45,11 @@ export default function buildTree(files) {
   let root = tree;
   while (root && root.children.size === 1) {
     const firstKey = root.children.keys().next().value;
-    root = root.children.get(firstKey);
+    const node = firstKey && root.children.get(firstKey);
+    if (!node) {
+      break;
+    }
+    root = node;
   }
 
   return root;

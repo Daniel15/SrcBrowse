@@ -1,0 +1,15 @@
+[ignore]
+# https://github.com/facebook/flow/issues/869
+.*/node_modules/config-chain/test/broken.json
+
+[include]
+
+[declarations]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

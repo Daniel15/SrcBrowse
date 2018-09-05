@@ -1,9 +1,21 @@
+// @flow
+
+import React from 'react';
+
 import classNames from './App.css';
 import Files from './Files';
 
 import getFilesFromSourceMap from '../getFilesFromSourceMap';
 
-export default class App extends React.Component {
+type Props = {||};
+type State = {|
+  error: ?Error,
+  files: ?Map<string, ?string>,
+  id: number,
+  loading: boolean,
+|};
+
+export default class App extends React.Component<Props, State> {
   state = {
     error: null,
     files: null,
@@ -41,7 +53,7 @@ export default class App extends React.Component {
     );
   }
 
-  _onSelectFile = (evt) => {
+  _onSelectFile = (evt: {target: {files: Array<File>}}) => {
     this.setState(state => ({id: state.id + 1, loading: true}));
     const file = evt.target.files[0];
     getFilesFromSourceMap(file).then(

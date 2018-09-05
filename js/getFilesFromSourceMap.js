@@ -1,4 +1,10 @@
-export default function getFilesFromSourceMap(file) {
+// @flow
+
+import sourceMap from 'source-map';
+
+export default function getFilesFromSourceMap(
+  file: File
+): Promise<Map<string, ?string>> {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.onload = () => {
