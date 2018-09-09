@@ -53,20 +53,22 @@ export default class App extends React.Component<Props, State> {
     );
   }
 
-  _onSelectFile = (evt: {target: {files: Array<File>}}) => {
+  _onSelectFile = async (evt: {target: {files: Array<File>}}) => {
     this.setState(state => ({id: state.id + 1, loading: true}));
     const file = evt.target.files[0];
-    getFilesFromSourceMap(file).then(
-      files => this.setState({
+    try {
+      const files = await getFilesFromSourceMap(file);
+      this.setState({
         error: null,
         loading: false,
         files,
-      }),
-      error => this.setState({
+      });
+    } catch (error) {
+      this.setState({
         error,
         files: null,
         loading: false,
-      })
-    );
+      });
+    }
   }
 }
