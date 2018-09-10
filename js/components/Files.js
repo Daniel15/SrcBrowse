@@ -4,6 +4,7 @@ import React from 'react';
 
 import classNames from './Files.css';
 import Code from './Code';
+import ExportToZIP from './ExportToZIP';
 import FileTree from './FileTree';
 
 import buildTree from '../buildTree';
@@ -24,14 +25,19 @@ export default class Files extends React.Component<Props, State> {
   };
 
   render() {
+    const tree = buildTree(Array.from(this.props.files.keys()));
     return (
       <div className={classNames.filesContainer}>
+        <ExportToZIP
+          files={this.props.files}
+          tree={tree}
+        />
         <h2>{this._renderTitle()}</h2>
         <div className={classNames.files}>
           <FileTree
             selectedDir={this.state.selectedDir}
             selectedFile={this.state.selectedFile}
-            tree={buildTree(Array.from(this.props.files.keys()))}
+            tree={tree}
             onSelectDir={this._onSelectDir}
             onSelectFile={this._onSelectFile}
           />
