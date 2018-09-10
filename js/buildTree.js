@@ -45,8 +45,11 @@ export default function buildTree(files: Array<string>): TreeNode {
   let root = tree;
   while (root && root.children.size === 1) {
     const firstKey = root.children.keys().next().value;
-    const node = firstKey && root.children.get(firstKey);
-    if (!node) {
+    if (firstKey == null) {
+      break;
+    }
+    const node = root.children.get(firstKey);
+    if (node == null) {
       break;
     }
     root = node;
