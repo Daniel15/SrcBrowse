@@ -40,7 +40,8 @@ export default class App extends React.Component<Props, State> {
         {!this.state.files && !this.state.loading && (
           <div className={classNames.landingNotice}>
             Select a source map file to browse the files contained inside
-            it:
+            it.{' '}
+            <a href="#" onClick={this._showExample}>See an example</a>
           </div>
         )}
         <label>
@@ -71,6 +72,7 @@ export default class App extends React.Component<Props, State> {
               type="text"
               placeholder="https://example.com/script.map"
               size={100}
+              value={this.state.inputFile.url}
               onChange={this._setInputURL}
             />
             <button type="submit">Go</button>
@@ -155,5 +157,22 @@ export default class App extends React.Component<Props, State> {
         loading: false,
       });
     }
+  }
+
+  _showExample = (evt: SyntheticEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    // Assume the last script tag is the main script, and get its map URL
+    const scripts = document.getElementsByTagName('script');
+    const lastScript = scripts[scripts.length - 1];
+    const mapURL = lastScript.src.replace(/\.js$/, '.map');
+
+    this.setState({
+      inputFile: {
+        type: 'url',
+        url: mapURL,
+      },
+    }, () => {
+      this._onSelectURL(evt);
+    });
   }
 }
